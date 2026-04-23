@@ -31,18 +31,20 @@ exports.criar = (req, res) => {
 // PUT - atualizar
 exports.atualizar = (req, res) => {
   const id = parseInt(req.params.id);
-  const usuario = usuarios.find(u => u.id === id);
-
-  if (!usuario) {
+  const usuario = usuarios.findIndex(u => u.id === id);
+  if (usuario < 0) {
     return res.status(404).json({ mensagem: "Usuário não encontrado" });
   }
-
-  usuario.nome = req.body.nome;
-  res.json(usuario);
+  // usuario = 1
+  usuarios[usuario].nome = req.body.nome
+  // usuario.nome = req.body.nome;
+  res.json(usuarios[usuario]);
 };
 
 // DELETE - remover
 exports.deletar = (req, res) => {
+  // 1
+  // [{id:1, nome: "an"}]
   const id = parseInt(req.params.id);
   usuarios = usuarios.filter(u => u.id !== id);
 
